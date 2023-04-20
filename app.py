@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request
 from flask_debugtoolbar import DebugToolbarExtension
 
-from stories import silly_story, excited_story
+from stories import silly_story
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "secret"
+
+debug = DebugToolbarExtension(app)
 
 @app.get("/")
 def make_questions():
@@ -13,9 +15,7 @@ def make_questions():
 
 @app.get("/results")
 def make_results():
-    print(request.args)
+    """Return story with values from form"""
     story = silly_story.get_result_text(request.args)
 
-    return render_template("results.html", story=story )
-
-debug = DebugToolbarExtension(app)
+    return render_template("results.html", story=story)
