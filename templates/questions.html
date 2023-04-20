@@ -7,14 +7,14 @@
   <h1 class="pt-4 mb-3 text-center">Madlibs!</h1>
 
   <form action="/results" class="pb-4">
-    {% for prompt in {{prompt_list}} %}
+    {% for prompt in prompt_list %}
     <div class="mb-3 row">
       <label class="col-5 col-form-label text-end">{{ prompt }}</label>
       <div class="col-7">
         <input
-            name= "test"
+            name="{{prompt}}"
             required
-            aria-label= "test"
+            aria-label="{{prompt}}"
             class="form-control">
       </div>
     </div>

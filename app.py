@@ -8,23 +8,14 @@ app.config['SECRET_KEY'] = "secret"
 
 @app.get("/")
 def make_questions():
-
     """Put the questions on the page"""
-
-
-
-    html = render_template("questions.html", prompt_list=silly_story.prompts)
-    #                        place=place,
-    # noun=noun, verb=verb, adjective=adjective, plural_noun=plural_noun)
-
-    return html
+    return  render_template("questions.html", prompt_list=silly_story.prompts)
 
 @app.get("/results")
 def make_results():
-    place = request.args.get("place")
-    noun = request.args.get("noun")
-    verb = request.args.get("verb")
-    adjective = request.args.get("adjective")
-    plural_noun = request.args.get("plural_noun")
+    print(request.args)
+    story = silly_story.get_result_text(request.args)
+
+    return render_template("results.html", story=story )
 
 debug = DebugToolbarExtension(app)
